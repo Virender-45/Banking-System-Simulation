@@ -23,28 +23,6 @@ public:
 	void withdrawMoney();
 	void transferMoney();
 };
-void Bank::transferMoney() {
-	int s_ac, r_ac;
-	cout << "Enter the sender Account No. : ";
-	cin >> s_ac;
-	cout << "Enter the reciever's Account No : ";
-	cin >> r_ac;
-	
-	bool sender_found = false;
-	bool reciever_found = false;
-	for (int i = 0; i < totalCustomer;i++) {
-		if (s_ac == cusHave[i].accountNumber) {
-
-		}
-	}
-	
-	if (!sender_found) {
-		cout << "Sender Account No. is Not Found.." << endl;
-	}
-	if (!reciever_found) {
-		cout << "Reciever Account No. is Not Found.." << endl;
-	}
-}
 void Bank::withdrawMoney() {
 	int ac;
 	double amt;
