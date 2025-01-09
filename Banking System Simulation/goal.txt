@@ -1,0 +1,25 @@
+Design a Banking System with the following requirements:
+
+Requirements
+Classes:
+
+Create a Customer class with attributes:
+
+int accountNumber
+string name
+double balance
+
+Create a Bank class to manage customers.
+
+Features:
+
+Add New Customer: Allow the bank to add a new customer with an initial deposit.
+Deposit Money: Deposit an amount into a customer’s account.
+Withdraw Money: Withdraw an amount from a customer’s account (ensure sufficient balance).
+Display All Customers: List all customers with their details (account number, name, and balance).
+Search Customer: Search for a customer by account number or name and display their details.
+Transfer Money: Transfer money between two customers using their account numbers.
+Constraints:
+
+The account number should be unique.
+Handle edge cases like invalid account numbers or insufficient balance gracefully.
