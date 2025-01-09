@@ -23,6 +23,136 @@ public:
 	void withdrawMoney();
 	void transferMoney();
 };
+//void Bank::transferMoney() {  //Not Properly Working
+//	int s_ac, r_ac;
+//	double amt;
+//	cout << "Enter the sender Account No. : ";
+//	cin >> s_ac;
+//	cout << "Enter the reciever's Account No : ";
+//	cin >> r_ac;
+//	cout << "Enter the amount you want to transfer : ";
+//	cin >> amt;
+//
+//	bool sender_found = false;
+//	bool reciever_found = false;
+//	for (int i = 0; i < totalCustomer;i++) {
+//		if (s_ac == cusHave[i].accountNumber) {
+//			sender_found = true;
+//			if (amt <= cusHave[i].balance) {
+//				cusHave[i].balance -= amt; 
+//				cout << "Money debited from " << cusHave[i].name << " account" << endl;
+//			}
+//			else {
+//				cout << "Insufficient balance." << endl;
+//			}
+//		}
+//		if (r_ac == cusHave[i].accountNumber) {
+//			reciever_found = true;
+//			cusHave[i].balance += amt;
+//			cout << "Money is credited into " << cusHave[i].name << " account" << endl;
+//		}
+//	}
+//
+//	if (!sender_found) {
+//		cout << "Sender Account No. is Not Found.." << endl;
+//	}
+//	if (!reciever_found) {
+//		cout << "Reciever Account No. is Not Found.." << endl;
+//	}
+//}
+//void Bank::transferMoney() {	//Not Properly Working
+//	int s_ac, r_ac;
+//	double amt;
+//	cout << "Enter the sender Account No. : ";
+//	cin >> s_ac;
+//	cout << "Enter the reciever's Account No : ";
+//	cin >> r_ac;
+//	cout << "Enter the amount you want to transfer : ";
+//	cin >> amt;
+//
+//	bool sender_found = false;
+//	bool reciever_found = false;
+//
+//	for (int i = 0; i < totalCustomer;i++) {
+//		if (r_ac == cusHave[i].accountNumber) {
+//			reciever_found = true;
+//			cout << "Reciever Account Found Sucessfully" << endl;
+//		}
+//		if (s_ac == cusHave[i].accountNumber) {
+//			sender_found = true;
+//			cout << "Sender Account Found Sucessfully" << endl;
+//			if (amt >= cusHave[i].balance) {
+//				cout << "Insufficient Balance" << endl;
+//			}
+//		}
+//	}
+//	if (sender_found == true && reciever_found == true) {
+//		for (int i = 0; i < totalCustomer;i++) {
+//			if (s_ac == cusHave[i].accountNumber) {
+//				cusHave[i].balance -= amt;
+//				cout << "Money Debited from " << cusHave[i].name << " account" << endl;
+//			}
+//			if (r_ac == cusHave[i].accountNumber) {
+//				cusHave[i].balance += amt;
+//				cout << "Money Credited to " << cusHave[i].name << " account" << endl;
+//			}
+//		}
+//	}
+//	else if (!sender_found) {
+//		cout << "Semder Account doesnot Found" << endl;
+//	}
+//	else if (!reciever_found) {
+//		cout << "Reciever Account doesnot Found" << endl;
+//	}
+//}
+void Bank::transferMoney() {
+		int s_ac, r_ac;
+		double amt, bal;
+		cout << "Enter the sender Account No. : ";
+		cin >> s_ac;
+		cout << "Enter the reciever's Account No : ";
+		cin >> r_ac;
+		cout << "Enter the amount you want to transfer : ";
+		cin >> amt;
+	
+		bool sender_found = false;
+		bool reciever_found = false;
+	
+		for (int i = 0;i < totalCustomer;i++) {
+			if (s_ac == cusHave[i].accountNumber) {
+				sender_found = true;
+				bal = cusHave[i].balance;
+				if (bal < amt) {
+					cout << "Insufficient Balance in Sender Account" << endl;
+				}
+			}
+			else if (r_ac == cusHave[i].accountNumber) {
+				reciever_found = true;
+			}
+		}
+		if (sender_found == true && reciever_found == true && bal >= amt) {
+			for (int i = 0; i < totalCustomer;i++) {
+				if (s_ac == cusHave[i].accountNumber) {
+					cusHave[i].balance -= amt;
+					cout << "Money Debited form " << cusHave[i].name << " Account " << endl;
+				}
+				if (r_ac == cusHave[i].accountNumber) {
+					cusHave[i].balance += amt;
+					cout << "Money Credited to " << cusHave[i].name << " Account " << endl;
+				}
+			}
+			cout << "Transaction Successful" << endl;
+		}
+		if (!sender_found) {
+			cout << "Sender Account doesnot found" << endl;
+		}
+		if (!reciever_found) {
+			cout << "Reciever Account doesnot found" << endl;
+		}
+		else if (!sender_found || !reciever_found) {
+			cout << "Transaction failed!!!" << endl;
+		}
+}
 void Bank::withdrawMoney() {
 	int ac;
 	double amt;
@@ -41,7 +171,7 @@ void Bank::withdrawMoney() {
 				cout << "Balance left in account " << cusHave[i].accountNumber << " is " << cusHave[i].balance << endl;
 			}
 			else {
-				cout << "Not a valid Amount.." << endl;
+				cout << "Insufficient balance." << endl;
 			}
 		}
 	}
@@ -118,7 +248,7 @@ Bank::Bank() {
 	cusHave[0] = { 10001, "Virender", 100 };
 	cusHave[1] = { 10002, "Sahil", 1000 };
 	cusHave[2] = { 10003, "Atul", 10000 };
-	cusHave[3] = { 10004, "Nikhil", 100000};
+	cusHave[3] = { 10004, "Nikhil", 100000 };
 	cusHave[4] = { 10005, "Abhay", 1000000 };
 	totalCustomer = 5;
 }
@@ -159,6 +289,7 @@ int main() {
 			break;
 		case 6:
 			obj.transferMoney();
+			break;
 		case 7:
 			cout << "Eciting the bank..." << endl;
 			break;
