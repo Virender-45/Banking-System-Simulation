@@ -28,6 +28,23 @@ void Bank::addCustomer() {
     cout << "How many customers you want to add: ";
     cin >> n;
 
+    for (int i = totalCustomer; i < n + totalCustomer; i++) {
+        cout << "Enter details of customer " << i + 1 << ":" << endl;
+        cout << "Enter account number: ";
+        cin >> cusHave[totalCustomer].accountNumber;
+        cout << "Enter name: ";
+        cin >> cusHave[totalCustomer].name;
+        cout << "Enter the balance: ";
+        cin >> cusHave[totalCustomer].balance;
+        cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << endl;
+    }
+        totalCustomer += n;
+}
+/*void Bank::addCustomer() {    //This may cause data overwriting
+    int n;
+    cout << "How many customers you want to add: ";
+    cin >> n;
+
     for (int i = 0; i < n; i++) {
         cout << "Enter details of customer " << i + 1 << ":" << endl;
         cout << "Enter account number: ";
@@ -37,10 +54,9 @@ void Bank::addCustomer() {
         cout << "Enter the balance: ";
         cin >> cusHave[totalCustomer].balance;
         cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << endl;
-
         totalCustomer++;
     }
-}
+}*/
 
 void Bank::displayCustomers() {
     for (int i = 0; i < totalCustomer; i++) {
