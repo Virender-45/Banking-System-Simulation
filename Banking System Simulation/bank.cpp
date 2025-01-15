@@ -40,6 +40,7 @@ void Bank::addCustomer() {
     }
         totalCustomer += n;
 }
+
 /*void Bank::addCustomer() {    //This may cause data overwriting
     int n;
     cout << "How many customers you want to add: ";
@@ -57,7 +58,6 @@ void Bank::addCustomer() {
         totalCustomer++;
     }
 }*/
-
 void Bank::displayCustomers() {
     for (int i = 0; i < totalCustomer; i++) {
         cout << "Customer " << i + 1 << " :" << endl;
@@ -180,34 +180,3 @@ void Bank::transferMoney() {
         cout << "Transaction failed!!!" << endl;
     }
 }
-/*void Bank::transferMoney() {  //Alternate for better apprach
-    int s_ac, r_ac;
-    double amt;
-    cout << "Enter the sender Account No.: ";
-    cin >> s_ac;
-    cout << "Enter the receiver's Account No.: ";
-    cin >> r_ac;
-    cout << "Enter the amount to transfer: ";
-    cin >> amt;
-
-    int senderIndex = -1, receiverIndex = -1;
-
-    for (int i = 0; i < totalCustomer; i++) {
-        if (cusHave[i].accountNumber == s_ac) senderIndex = i;
-        if (cusHave[i].accountNumber == r_ac) receiverIndex = i;
-    }
-
-    if (senderIndex != -1 && receiverIndex != -1) {
-        if (cusHave[senderIndex].balance >= amt) {
-            cusHave[senderIndex].balance -= amt;
-            cusHave[receiverIndex].balance += amt;
-            cout << "Transfer successful." << endl;
-        }
-        else {
-            cout << "Insufficient balance in sender's account." << endl;
-        }
-    }
-    else {
-        cout << "One or both accounts not found." << endl;
-    }
-}*/
