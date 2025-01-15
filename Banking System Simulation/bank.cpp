@@ -132,6 +132,7 @@ void Bank::withdrawMoney() {
         cout << "Account not found." << endl;
     }
 }
+
 void Bank::transferMoney() {
     int s_ac, r_ac;
     double amt, bal;
