@@ -4,29 +4,30 @@ using namespace std;
 
 int main() {
     int choice;
-    Bank obj;
+    Bank bank;
 
+    /*
     do {
-        obj.displayMenu();
+        bank.displayMenu();
         cin >> choice;
         switch (choice) {
         case 1:
-            obj.addCustomer();
+            bank.addCustomer();
             break;
         case 2:
-            obj.displayCustomers();
+            bank.displayCustomers();
             break;
         case 3:
-            obj.searchCustomer();
+            bank.searchCustomer();
             break;
         case 4:
-            obj.depositMoney();
+            bank.depositMoney();
             break;
         case 5:
-            obj.withdrawMoney();
+            bank.withdrawMoney();
             break;
         case 6:
-            obj.transferMoney();
+            bank.transferMoney();
             break;
         case 7:
             cout << "Exiting the bank..." << endl;
@@ -35,7 +36,42 @@ int main() {
             cout << "Invalid input..." << endl;
             break;
         }
-    } while (choice != 7);
+    } while (choice != 7);*/
+
+	// The above do-while loop can be replaced with the following while loop
+    while (true) {
+        bank.displayMenu();
+        cin >> choice;
+
+        if (choice == 7) {
+            cout << "Exiting the bank..." << endl;
+            break;
+        }
+
+        switch (choice) {
+        case 1:
+            bank.addCustomer();
+            break;
+        case 2:
+            bank.displayCustomers();
+            break;
+        case 3:
+            bank.searchCustomer();
+            break;
+        case 4:
+            bank.depositMoney();
+            break;
+        case 5:
+            bank.withdrawMoney();
+            break;
+        case 6:
+            bank.transferMoney();
+            break;
+        default:
+            cout << "Invalid input. Please try again." << endl;
+        }
+    }
+
 
     return 0;
 }
