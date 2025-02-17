@@ -12,7 +12,8 @@ Bank::Bank()
     totalCustomer = 5;
 }
 
-void Bank::displayMenu() {
+void Bank::displayMenu() 
+{
     cout << "----------Welcome to Apna Bank----------" << endl;
     cout << "(1) Add Customer." << endl;
     cout << "(2) Display All Customers." << endl;
