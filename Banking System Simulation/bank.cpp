@@ -44,7 +44,8 @@ void Bank::addCustomer()
         totalCustomer += n;
 }
 
-/*void Bank::addCustomer() {    //This may cause data overwriting
+/*void Bank::addCustomer()
+{    //This may cause data overwriting
     int n;
     cout << "How many customers you want to add: ";
     cin >> n;
