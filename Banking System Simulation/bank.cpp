@@ -2,7 +2,8 @@
 #include <iostream>
 using namespace std;
 
-Bank::Bank() {
+Bank::Bank()
+{
     cusHave[0] = { 10001, "Virender", 100 };
     cusHave[1] = { 10002, "Sahil", 1000 };
     cusHave[2] = { 10003, "Atul", 10000 };
