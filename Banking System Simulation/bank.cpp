@@ -62,7 +62,8 @@ void Bank::addCustomer()
         totalCustomer++;
     }
 }*/
-void Bank::displayCustomers() {
+void Bank::displayCustomers()
+{
     for (int i = 0; i < totalCustomer; i++) {
         cout << "Customer " << i + 1 << " :" << endl;
         cout << "Account No.: " << cusHave[i].accountNumber << endl;
