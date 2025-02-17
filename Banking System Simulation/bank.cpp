@@ -25,7 +25,8 @@ void Bank::displayMenu()
     cout << "Enter your choice : ";
 }
 
-void Bank::addCustomer() {
+void Bank::addCustomer()
+{
     int n;
     cout << "How many customers you want to add: ";
     cin >> n;
