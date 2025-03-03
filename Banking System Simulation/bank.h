@@ -1,13 +1,12 @@
 #pragma once
 
 #include <string>
-using namespace std;
 
 class Bank {
 public:
     struct Customer {
         int accountNumber = 0;
-        string name;
+        std::string name;
         double balance = 0;
     };
 
