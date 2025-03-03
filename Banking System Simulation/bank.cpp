@@ -49,15 +49,12 @@ void Bank::addCustomer()
     int n;
     std::cout << "How many customers you want to add: ";
     std::cin >> n;
-    // opeing file using constructor and writing it
-    std::ofstream cusData("customer.txt");
-    cusData.open("customer.txt");
+    
 
     for (int i = totalCustomer; i < n + totalCustomer; i++) {
         std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
         std::cout << "Enter account number: ";
         std::cin >> cusHave[totalCustomer].accountNumber;
-        cusData << cusHave[totalCustomer].accountNumber;
         std::cout << "Enter name: ";
         std::cin >> cusHave[totalCustomer].name;
         std::cout << "Enter the balance: ";
@@ -65,7 +62,12 @@ void Bank::addCustomer()
         std::cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << std::endl;
     }
     totalCustomer += n;
-    cusData.close();
+
+    // opeing file using constructor and writing it
+    std::ofstream cusData("customer.txt");
+    //cusData.open("customer.txt");
+    cusData << cusHave[totalCustomer].accountNumber;
+    //cusData.close();
 }
 
 void Bank::displayCustomers()
