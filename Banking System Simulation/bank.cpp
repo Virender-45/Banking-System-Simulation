@@ -64,7 +64,7 @@ void Bank::addCustomer()
     totalCustomer += n;
 
     // opeing file using constructor and writing it
-    std::ofstream cusData("customer.txt");
+    std::ofstream cusData("customer.txt", std::ios::app);
     //cusData.open("customer.txt");
     cusData << cusHave[totalCustomer].accountNumber;
     //cusData.close();
