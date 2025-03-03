@@ -1,6 +1,7 @@
 #include "Bank.h"
 #include <iostream>
-using namespace std;
+#include <fstream>
+#include <string>
 
 Bank::Bank()
 {
@@ -8,38 +9,38 @@ Bank::Bank()
     cusHave[1] = { 10002, "Sahil", 1000 };
     cusHave[2] = { 10003, "Atul", 10000 };
     cusHave[3] = { 10004, "Nikhil", 100000 };
-    cusHave[4] = { 10005, "Abhay", 1000000 };
+    cusHave[4] = { 10005, "Abhay", 99872 };
     totalCustomer = 5;
 }
 
 void Bank::displayMenu() 
 {
-    cout << "----------Welcome to Apna Bank----------" << endl;
-    cout << "(1) Add Customer." << endl;
-    cout << "(2) Display All Customers." << endl;
-    cout << "(3) Search a Customer." << endl;
-    cout << "(4) Deposit Money." << endl;
-    cout << "(5) Withdraw Money." << endl;
-    cout << "(6) Transfer Money." << endl;
-    cout << "(7) Exit From Bank." << endl;
-    cout << "Enter your choice : ";
+    std::cout << "----------Welcome to Apna Bank----------" << std::endl;
+    std::cout << "(1) Add Customer." << std::endl;
+    std::cout << "(2) Display All Customers." << std::endl;
+    std::cout << "(3) Search a Customer." << std::endl;
+    std::cout << "(4) Deposit Money." << std::endl;
+    std::cout << "(5) Withdraw Money." << std::endl;
+    std::cout << "(6) Transfer Money." << std::endl;
+    std::cout << "(7) Exit From Bank." << std::endl;
+    std::cout << "Enter your choice : ";
 }
 
 void Bank::addCustomer()
 {
     int n;
-    cout << "How many customers you want to add: ";
-    cin >> n;
+    std::cout << "How many customers you want to add: ";
+    std::cin >> n;
 
     for (int i = totalCustomer; i < n + totalCustomer; i++) {
-        cout << "Enter details of customer " << i + 1 << ":" << endl;
-        cout << "Enter account number: ";
-        cin >> cusHave[totalCustomer].accountNumber;
-        cout << "Enter name: ";
-        cin >> cusHave[totalCustomer].name;
-        cout << "Enter the balance: ";
-        cin >> cusHave[totalCustomer].balance;
-        cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << endl;
+        std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
+        std::cout << "Enter account number: ";
+        std::cin >> cusHave[totalCustomer].accountNumber;
+        std::cout << "Enter name: ";
+        std::cin >> cusHave[totalCustomer].name;
+        std::cout << "Enter the balance: ";
+        std::cin >> cusHave[totalCustomer].balance;
+        std::cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << std::endl;
     }
         totalCustomer += n;
 }
@@ -47,106 +48,106 @@ void Bank::addCustomer()
 /*void Bank::addCustomer()
 {    //This may cause data overwriting
     int n;
-    cout << "How many customers you want to add: ";
-    cin >> n;
+    std::cout << "How many customers you want to add: ";
+    std::cin >> n;
 
     for (int i = 0; i < n; i++) {
-        cout << "Enter details of customer " << i + 1 << ":" << endl;
-        cout << "Enter account number: ";
-        cin >> cusHave[totalCustomer].accountNumber;
-        cout << "Enter name: ";
-        cin >> cusHave[totalCustomer].name;
-        cout << "Enter the balance: ";
-        cin >> cusHave[totalCustomer].balance;
-        cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << endl;
+        std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
+        std::cout << "Enter account number: ";
+        std::cin >> cusHave[totalCustomer].accountNumber;
+        std::cout << "Enter name: ";
+        std::cin >> cusHave[totalCustomer].name;
+        std::cout << "Enter the balance: ";
+        std::cin >> cusHave[totalCustomer].balance;
+        std::cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << std::endl;
         totalCustomer++;
     }
 }*/
 void Bank::displayCustomers()
 {
     for (int i = 0; i < totalCustomer; i++) {
-        cout << "Customer " << i + 1 << " :" << endl;
-        cout << "Account No.: " << cusHave[i].accountNumber << endl;
-        cout << "Name: " << cusHave[i].name << endl;
-        cout << "Balance: " << cusHave[i].balance << endl;
+        std::cout << "Customer " << i + 1 << " :" << std::endl;
+        std::cout << "Account No.: " << cusHave[i].accountNumber << std::endl;
+        std::cout << "Name: " << cusHave[i].name << std::endl;
+        std::cout << "Balance: " << cusHave[i].balance << std::endl;
     }
 }
 
 void Bank::searchCustomer() {
     int ac;
-    cout << "Enter the Account No. of Customer: ";
-    cin >> ac;
+    std::cout << "Enter the Account No. of Customer: ";
+    std::cin >> ac;
 
     bool found = false;
     for (int i = 0; i < totalCustomer; i++) {
         if (ac == cusHave[i].accountNumber) {
-            cout << "Customer with Acc. No. " << ac << " is:" << endl;
-            cout << "Name: " << cusHave[i].name << endl;
-            cout << "Balance: " << cusHave[i].balance << endl;
+            std::cout << "Customer with Acc. No. " << ac << " is:" << std::endl;
+            std::cout << "Name: " << cusHave[i].name << std::endl;
+            std::cout << "Balance: " << cusHave[i].balance << std::endl;
             found = true;
         }
     }
     if (!found) {
-        cout << "Not found..." << endl;
+        std::cout << "Not found..." << std::endl;
     }
 }
 
 void Bank::depositMoney() {
     int ac;
     double amt;
-    cout << "Enter the Account No.: ";
-    cin >> ac;
-    cout << "Enter the amount to deposit: ";
-    cin >> amt;
+    std::cout << "Enter the Account No.: ";
+    std::cin >> ac;
+    std::cout << "Enter the amount to deposit: ";
+    std::cin >> amt;
 
     bool found = false;
     for (int i = 0; i < totalCustomer; i++) {
         if (ac == cusHave[i].accountNumber) {
             cusHave[i].balance += amt;
-            cout << "Deposit successful. Updated balance: " << cusHave[i].balance << endl;
+            std::cout << "Deposit successful. Updated balance: " << cusHave[i].balance << std::endl;
             found = true;
         }
     }
     if (!found) {
-        cout << "Account not found." << endl;
+        std::cout << "Account not found." << std::endl;
     }
 }
 
 void Bank::withdrawMoney() {
     int ac;
     double amt;
-    cout << "Enter the Account No.: ";
-    cin >> ac;
-    cout << "Enter the amount to withdraw: ";
-    cin >> amt;
+    std::cout << "Enter the Account No.: ";
+    std::cin >> ac;
+    std::cout << "Enter the amount to withdraw: ";
+    std::cin >> amt;
 
     bool found = false;
     for (int i = 0; i < totalCustomer; i++) {
         if (ac == cusHave[i].accountNumber) {
             if (amt <= cusHave[i].balance) {
                 cusHave[i].balance -= amt;
-                cout << "Withdrawal successful. Remaining balance: " << cusHave[i].balance << endl;
+                std::cout << "Withdrawal successful. Remaining balance: " << cusHave[i].balance << std::endl;
             }
             else {
-                cout << "Insufficient balance." << endl;
+                std::cout << "Insufficient balance." << std::endl;
             }
             found = true;
         }
     }
     if (!found) {
-        cout << "Account not found." << endl;
+        std::cout << "Account not found." << std::endl;
     }
 }
 
 void Bank::transferMoney() {
     int s_ac, r_ac;
     double amt, bal;
-    cout << "Enter the sender Account No. : ";
-    cin >> s_ac;
-    cout << "Enter the reciever's Account No : ";
-    cin >> r_ac;
-    cout << "Enter the amount you want to transfer : ";
-    cin >> amt;
+    std::cout << "Enter the sender Account No. : ";
+    std::cin >> s_ac;
+    std::cout << "Enter the reciever's Account No : ";
+    std::cin >> r_ac;
+    std::cout << "Enter the amount you want to transfer : ";
+    std::cin >> amt;
 
     bool sender_found = false;
     bool reciever_found = false;
@@ -156,7 +157,7 @@ void Bank::transferMoney() {
             sender_found = true;
             bal = cusHave[i].balance;
             if (bal < amt) {
-                cout << "Insufficient Balance in Sender Account" << endl;
+                std::cout << "Insufficient Balance in Sender Account" << std::endl;
             }
         }
         else if (r_ac == cusHave[i].accountNumber) {
@@ -167,22 +168,22 @@ void Bank::transferMoney() {
         for (int i = 0; i < totalCustomer;i++) {
             if (s_ac == cusHave[i].accountNumber) {
                 cusHave[i].balance -= amt;
-                cout << "Money Debited form " << cusHave[i].name << " Account " << endl;
+                std::cout << "Money Debited form " << cusHave[i].name << " Account " << std::endl;
             }
             if (r_ac == cusHave[i].accountNumber) {
                 cusHave[i].balance += amt;
-                cout << "Money Credited to " << cusHave[i].name << " Account " << endl;
+                std::cout << "Money Credited to " << cusHave[i].name << " Account " << std::endl;
             }
         }
-        cout << "Transaction Successful" << endl;
+        std::cout << "Transaction Successful" << std::endl;
     }
     if (!sender_found) {
-        cout << "Sender Account doesnot found" << endl;
+        std::cout << "Sender Account doesnot found" << std::endl;
     }
     if (!reciever_found) {
-        cout << "Reciever Account doesnot found" << endl;
+        std::cout << "Reciever Account doesnot found" << std::endl;
     }
     else if (!sender_found || !reciever_found) {
-        cout << "Transaction failed!!!" << endl;
+        std::cout << "Transaction failed!!!" << std::endl;
     }
 }
