@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Bank.h"
-using namespace std;
 
 int main() {
     int choice;
@@ -9,7 +8,7 @@ int main() {
     /*
     do {
         bank.displayMenu();
-        cin >> choice;
+        std::cin >> choice;
         switch (choice) {
         case 1:
             bank.addCustomer();
@@ -30,10 +29,10 @@ int main() {
             bank.transferMoney();
             break;
         case 7:
-            cout << "Exiting the bank..." << endl;
+            std::cout << "Exiting the bank..." << std::endl;
             break;
         default:
-            cout << "Invalid input..." << endl;
+            std::cout << "Invalid input..." << std::endl;
             break;
         }
     } while (choice != 7);*/
@@ -41,10 +40,10 @@ int main() {
 	// The above do-while loop can be replaced with the following while loop
     while (true) {
         bank.displayMenu();
-        cin >> choice;
+        std::cin >> choice;
 
         if (choice == 7) {
-            cout << "Exiting the bank..." << endl;
+            std::cout << "Exiting the bank..." << std::endl;
             break;
         }
 
@@ -68,7 +67,7 @@ int main() {
             bank.transferMoney();
             break;
         default:
-            cout << "Invalid input. Please try again." << endl;
+            std::cout << "Invalid input. Please try again." << std::endl;
         }
     }
 
