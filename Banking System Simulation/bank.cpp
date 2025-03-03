@@ -25,7 +25,7 @@ void Bank::displayMenu()
     std::cout << "(7) Exit From Bank." << std::endl;
     std::cout << "Enter your choice : ";
 }
-
+/*
 void Bank::addCustomer()
 {
     int n;
@@ -43,26 +43,31 @@ void Bank::addCustomer()
         std::cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << std::endl;
     }
         totalCustomer += n;
-}
-
-/*void Bank::addCustomer()
-{    //This may cause data overwriting
+}*/
+void Bank::addCustomer()
+{
     int n;
     std::cout << "How many customers you want to add: ";
     std::cin >> n;
+    // opeing file using constructor and writing it
+    std::ofstream cusData("customer.txt");
+    cusData.open("customer.txt");
 
-    for (int i = 0; i < n; i++) {
+    for (int i = totalCustomer; i < n + totalCustomer; i++) {
         std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
         std::cout << "Enter account number: ";
         std::cin >> cusHave[totalCustomer].accountNumber;
+        cusData << cusHave[totalCustomer].accountNumber;
         std::cout << "Enter name: ";
         std::cin >> cusHave[totalCustomer].name;
         std::cout << "Enter the balance: ";
         std::cin >> cusHave[totalCustomer].balance;
         std::cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << std::endl;
-        totalCustomer++;
     }
-}*/
+    totalCustomer += n;
+    cusData.close();
+}
+
 void Bank::displayCustomers()
 {
     for (int i = 0; i < totalCustomer; i++) {
@@ -183,7 +188,7 @@ void Bank::transferMoney() {
     if (!reciever_found) {
         std::cout << "Reciever Account doesnot found" << std::endl;
     }
-    else if (!sender_found || !reciever_found) {
+    if (!sender_found || !reciever_found) {
         std::cout << "Transaction failed!!!" << std::endl;
     }
 }
