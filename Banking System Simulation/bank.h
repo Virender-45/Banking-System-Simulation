@@ -18,6 +18,7 @@ public:
     Customer cusHave[100];
     int totalCustomer;
     Admin adHave[10];
+    int totalAdmin;
 
     Bank();
     void displayMainMenu();

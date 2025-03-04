@@ -75,7 +75,36 @@ int main() {
         std::cin >> choice;
 
         if (choice == 1) {
-            bank.displayAdminMenu();
+            int adChoice;
+            do
+            {
+                bank.displayAdminMenu();
+                std::cin >> adChoice;
+
+                switch (adChoice) {
+                case 1:
+                    bank.addCustomer();
+                    break;
+                case 2:
+                    bank.displayCustomers();
+                    break;
+                case 3:
+                    bank.searchCustomer();
+                    break;
+                case 4:
+                    bank.depositMoney();
+                    break;
+                case 5:
+                    //Logout
+                    std::cout << "Hello World";
+                    break;
+                case 6:
+                    std::cout << "Exiting from bank...";
+                    break;
+                default:
+                    std::cout << "Invalid input. Please try again." << std::endl;
+                }
+            } while (adChoice != 6 && adChoice != 5);
         }
         else if (choice == 2) {
             bank.displayUserMenu();

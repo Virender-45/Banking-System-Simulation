@@ -13,6 +13,10 @@ Bank::Bank()
     totalCustomer = 5;
 
     adHave[0] = { 100, "Virender123" };
+    adHave[1] = { 101, "Hello12" };
+    adHave[2] = { 102, "Pass3dd" };
+    adHave[3] = { 103, "YellowCotton" };
+    totalAdmin = 4;
 }
 
 void Bank::displayMainMenu()
@@ -24,10 +28,57 @@ void Bank::displayMainMenu()
     std::cout << "Enter your choice : ";
 }
 void Bank::displayAdminMenu() {
-    std::cout << "--------Admin Dashboard--------" << std::endl;
+    int id;
+    std::string pass;
+    std::cout << "Enter ID : ";
+    std::cin >> id;
+    std::cout << "Enter Password : ";
+    std::cin >> pass;
+    bool adFound = false;
+
+    for (int i = 0; i < totalAdmin; i++) {
+        if (id == adHave[i].id) {
+            if (pass == adHave[i].password) {
+                adFound = true;
+            }
+        }
+    }
+    if (adFound) {
+        std::cout << "--------Good Morning Admin--------" << std::endl << std::endl;
+        std::cout << "(1) Add Customer." << std::endl;
+        std::cout << "(2) Display All Customers." << std::endl;
+        std::cout << "(3) Search a Customer." << std::endl;
+        std::cout << "(4) Deposit Money." << std::endl;
+        std::cout << "(5) Log Out." << std::endl;
+        std::cout << "(6) Exit From Bank." << std::endl;
+        std::cout << "Enter Your Choice : ";
+    }
+    if (!adFound) {
+        std::cout << "Admin not found" << std::endl;
+    }
 }
 void Bank::displayUserMenu() {
-    std::cout << "--------User Dashboard--------" << std::endl;
+    int ac;
+    std::string pass;
+    std::cout << "Enter Account Number : ";
+    std::cin >> ac;
+    std::cout << "Enter Password : ";
+    std::cin >> pass;
+    bool cusFound = false;
+
+    for (int i = 0; i < totalAdmin; i++) {
+        if (ac == cusHave[i].accountNumber) {
+            if (pass == cusHave[i].password) {
+                cusFound = true;
+            }
+        }
+    }
+    if (cusFound) {
+        std::cout << "--------User Dashboard--------" << std::endl;
+    }
+    if (!cusFound) {
+        std::cout << "User not found" << std::endl;
+    }
 }
 void Bank::addCustomer()
 {
