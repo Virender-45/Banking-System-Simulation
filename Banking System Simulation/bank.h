@@ -4,17 +4,25 @@
 
 class Bank {
 public:
+    struct Admin {
+        int id;
+        std::string password;
+    };
     struct Customer {
         int accountNumber = 0;
         std::string name;
         double balance = 0;
+        std::string password;
     };
 
     Customer cusHave[100];
     int totalCustomer;
+    Admin adHave[10];
 
     Bank();
-    void displayMenu();
+    void displayMainMenu();
+    void displayAdminMenu();
+    void displayUserMenu();
     void addCustomer();
     void displayCustomers();
     void searchCustomer();

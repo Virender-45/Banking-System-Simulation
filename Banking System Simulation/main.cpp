@@ -37,8 +37,8 @@ int main() {
         }
     } while (choice != 7);*/
 
-	// The above do-while loop can be replaced with the following while loop
-    while (true) {
+    // The above do-while loop can be replaced with the following while loop
+    /*while (true) {
         bank.displayMenu();
         std::cin >> choice;
 
@@ -69,8 +69,25 @@ int main() {
         default:
             std::cout << "Invalid input. Please try again." << std::endl;
         }
-    }
+    }*/
+    while (true) {
+        bank.displayMainMenu();
+        std::cin >> choice;
 
+        if (choice == 1) {
+            bank.displayAdminMenu();
+        }
+        else if (choice == 2) {
+            bank.displayUserMenu();
+        }
+        else if (choice == 3) {
+            std::cout << "Exiting from bank...";
+            break;
+        }
+        else {
+            std::cout << "Invaild input" << std::endl;
+        }
+    }
 
     return 0;
 }

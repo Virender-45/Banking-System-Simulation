@@ -5,27 +5,30 @@
 
 Bank::Bank()
 {
-    cusHave[0] = { 10001, "Virender", 100 };
-    cusHave[1] = { 10002, "Sahil", 1000 };
-    cusHave[2] = { 10003, "Atul", 10000 };
-    cusHave[3] = { 10004, "Nikhil", 100000 };
-    cusHave[4] = { 10005, "Abhay", 99872 };
+    cusHave[0] = { 10001, "Virender", 100, "Rana12" };
+    cusHave[1] = { 10002, "Sahil", 1000, "Dhiman13" };
+    cusHave[2] = { 10003, "Atul", 10000, "Rana14" };
+    cusHave[3] = { 10004, "Nikhil", 100000, "Rana15" };
+    cusHave[4] = { 10005, "Abhay", 99872, "Chandel16" };
     totalCustomer = 5;
+
+    adHave[0] = { 100, "Virender123" };
 }
 
-void Bank::displayMenu() 
+void Bank::displayMainMenu()
 {
     std::cout << "----------Welcome to Apna Bank----------" << std::endl;
-    std::cout << "(1) Add Customer." << std::endl;
-    std::cout << "(2) Display All Customers." << std::endl;
-    std::cout << "(3) Search a Customer." << std::endl;
-    std::cout << "(4) Deposit Money." << std::endl;
-    std::cout << "(5) Withdraw Money." << std::endl;
-    std::cout << "(6) Transfer Money." << std::endl;
-    std::cout << "(7) Exit From Bank." << std::endl;
+    std::cout << "(1) Log in as Admin" << std::endl;
+    std::cout << "(2) Log in as User." << std::endl;
+    std::cout << "(3) Exit from bank." << std::endl;
     std::cout << "Enter your choice : ";
 }
-/*
+void Bank::displayAdminMenu() {
+    std::cout << "--------Admin Dashboard--------" << std::endl;
+}
+void Bank::displayUserMenu() {
+    std::cout << "--------User Dashboard--------" << std::endl;
+}
 void Bank::addCustomer()
 {
     int n;
@@ -43,13 +46,14 @@ void Bank::addCustomer()
         std::cout << "\nCustomer " << cusHave[totalCustomer].name << " added successfully.\n" << std::endl;
     }
         totalCustomer += n;
-}*/
+}
+/*
 void Bank::addCustomer()
 {
     int n;
     std::cout << "How many customers you want to add: ";
     std::cin >> n;
-    
+
 
     for (int i = totalCustomer; i < n + totalCustomer; i++) {
         std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
@@ -68,7 +72,7 @@ void Bank::addCustomer()
     //cusData.open("customer.txt");
     cusData << cusHave[totalCustomer].accountNumber;
     //cusData.close();
-}
+}*/
 
 void Bank::displayCustomers()
 {
@@ -159,7 +163,7 @@ void Bank::transferMoney() {
     bool sender_found = false;
     bool reciever_found = false;
 
-    for (int i = 0;i < totalCustomer;i++) {
+    for (int i = 0; i < totalCustomer; i++) {
         if (s_ac == cusHave[i].accountNumber) {
             sender_found = true;
             bal = cusHave[i].balance;
@@ -172,7 +176,7 @@ void Bank::transferMoney() {
         }
     }
     if (sender_found == true && reciever_found == true && bal >= amt) {
-        for (int i = 0; i < totalCustomer;i++) {
+        for (int i = 0; i < totalCustomer; i++) {
             if (s_ac == cusHave[i].accountNumber) {
                 cusHave[i].balance -= amt;
                 std::cout << "Money Debited form " << cusHave[i].name << " Account " << std::endl;
