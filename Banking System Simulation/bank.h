@@ -22,7 +22,9 @@ public:
 
     Bank();
     void displayMainMenu();
+    void adminLogin();
     void displayAdminMenu();
+    void userLogin();
     void displayUserMenu();
     void addCustomer();
     void displayCustomers();

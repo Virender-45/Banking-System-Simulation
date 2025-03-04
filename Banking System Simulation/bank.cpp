@@ -27,7 +27,7 @@ void Bank::displayMainMenu()
     std::cout << "(3) Exit from bank." << std::endl;
     std::cout << "Enter your choice : ";
 }
-void Bank::displayAdminMenu() {
+void Bank::adminLogin() {
     int id;
     std::string pass;
     std::cout << "Enter ID : ";
@@ -43,7 +43,12 @@ void Bank::displayAdminMenu() {
             }
         }
     }
-    if (adFound) {
+    if (!adFound) {
+        std::cout << "Admin not found" << std::endl;
+    }
+}
+
+void Bank::displayAdminMenu() {
         std::cout << "--------Good Morning Admin--------" << std::endl << std::endl;
         std::cout << "(1) Add Customer." << std::endl;
         std::cout << "(2) Display All Customers." << std::endl;
@@ -52,10 +57,6 @@ void Bank::displayAdminMenu() {
         std::cout << "(5) Log Out." << std::endl;
         std::cout << "(6) Exit From Bank." << std::endl;
         std::cout << "Enter Your Choice : ";
-    }
-    if (!adFound) {
-        std::cout << "Admin not found" << std::endl;
-    }
 }
 void Bank::displayUserMenu() {
     int ac;
