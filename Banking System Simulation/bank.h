@@ -22,9 +22,9 @@ public:
 
     Bank();
     void displayMainMenu();
-    void adminLogin();
+    bool adminLogin();
     void displayAdminMenu();
-    void userLogin();
+    bool userLogin();
     void displayUserMenu();
     void addCustomer();
     void displayCustomers();
@@ -32,4 +32,5 @@ public:
     void depositMoney();
     void withdrawMoney();
     void transferMoney();
+    void checkBalance();
 };

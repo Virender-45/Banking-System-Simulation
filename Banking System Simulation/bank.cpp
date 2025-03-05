@@ -27,25 +27,24 @@ void Bank::displayMainMenu()
     std::cout << "(3) Exit from bank." << std::endl;
     std::cout << "Enter your choice : ";
 }
-void Bank::adminLogin() {
+bool Bank::adminLogin() {
     int id;
     std::string pass;
     std::cout << "Enter ID : ";
     std::cin >> id;
     std::cout << "Enter Password : ";
     std::cin >> pass;
-    bool adFound = false;
 
     for (int i = 0; i < totalAdmin; i++) {
         if (id == adHave[i].id) {
             if (pass == adHave[i].password) {
-                adFound = true;
+                std::cout << "\nLogin Successful." << std::endl << std::endl;
+                return true;
             }
         }
     }
-    if (!adFound) {
-        std::cout << "Admin not found" << std::endl;
-    }
+    std::cout << "Admin not found" << std::endl;
+    return false;
 }
 
 void Bank::displayAdminMenu() {
@@ -58,28 +57,33 @@ void Bank::displayAdminMenu() {
         std::cout << "(6) Exit From Bank." << std::endl;
         std::cout << "Enter Your Choice : ";
 }
-void Bank::displayUserMenu() {
+bool Bank::userLogin() {
     int ac;
     std::string pass;
     std::cout << "Enter Account Number : ";
     std::cin >> ac;
     std::cout << "Enter Password : ";
     std::cin >> pass;
-    bool cusFound = false;
 
     for (int i = 0; i < totalAdmin; i++) {
         if (ac == cusHave[i].accountNumber) {
             if (pass == cusHave[i].password) {
-                cusFound = true;
+                return true;
             }
         }
     }
-    if (cusFound) {
-        std::cout << "--------User Dashboard--------" << std::endl;
-    }
-    if (!cusFound) {
-        std::cout << "User not found" << std::endl;
-    }
+    std::cout << "User not found" << std::endl;
+    return false;
+}
+
+void Bank::displayUserMenu() {
+    std::cout << "--------Good Morning User--------" << std::endl;
+    std::cout << "(1) Deposit Money." << std::endl;
+    std::cout << "(2) Check balance." << std::endl;
+    std::cout << "(3) Transfer Money." << std::endl;
+    std::cout << "(4) Log Out." << std::endl;
+    std::cout << "(5) Exit From Bank." << std::endl;
+    std::cout << "Enter your choice : ";
 }
 void Bank::addCustomer()
 {
@@ -249,4 +253,8 @@ void Bank::transferMoney() {
     if (!sender_found || !reciever_found) {
         std::cout << "Transaction failed!!!" << std::endl;
     }
+}
+
+void Bank::checkBalance() {
+    std::cout << "Nulla" << std::endl;
 }
