@@ -3,6 +3,8 @@
 #include <string>
 
 class Bank {
+private:
+    int loggedInUser = -1;
 public:
     struct Admin {
         int id;
@@ -16,9 +18,9 @@ public:
     };
 
     Customer cusHave[100];
-    int totalCustomer;
+    int totalCustomers;
     Admin adHave[10];
-    int totalAdmin;
+    int totalAdmins;
 
     Bank();
     void displayMainMenu();
