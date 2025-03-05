@@ -1,61 +1,100 @@
-#include "Bank.h"
-#include <iostream>
-#include <fstream>
+﻿#include "Bank.h"
 
-Bank::Bank()
-{
-    cusHave[0] = { 10001, "Virender", 100, "Rana12" };
-    cusHave[1] = { 10002, "Sahil", 1000, "Dhiman13" };
-    cusHave[2] = { 10003, "Atul", 10000, "Rana14" };
-    cusHave[3] = { 10004, "Nikhil", 100000, "Rana15" };
-    cusHave[4] = { 10005, "Abhay", 20000, "Chandel16" };
-    totalCustomers = 5;
+#include <fstream>  // Include for file handling
 
-    adHave[0] = { 100, "Virender123" };
-    adHave[1] = { 101, "Hello12" };
-    adHave[2] = { 102, "Pass3dd" };
-    adHave[3] = { 103, "YellowCotton" };
-    totalAdmins = 4;
+Bank::Bank() {
+    loadCustomersFromFile();
+    loadAdminsFromFile();
+
+    if (totalCustomers == 0) {
+        cusHave[0] = { 10001, "Virender", 100, "Rana12" };
+        cusHave[1] = { 10002, "Sahil", 1000, "Dhiman13" };
+        cusHave[2] = { 10003, "Atul", 10000, "Rana14" };
+        cusHave[3] = { 10004, "Nikhil", 100000, "Rana15" };
+        cusHave[4] = { 10005, "Abhay", 20000, "Chandel16" };
+        totalCustomers = 5;
+        saveCustomersToFile();
+    }
+
+    if (totalAdmins == 0) {
+        adHave[0] = { 100, "Virender123" };
+        adHave[1] = { 101, "Hello12" };
+        adHave[2] = { 102, "Pass3dd" };
+        adHave[3] = { 103, "YellowCotton" };
+        totalAdmins = 4;
+        saveAdminsToFile();
+    }
 }
 
-void Bank::displayMainMenu()
-{
-    std::cout << "----------Welcome to Apna Bank----------" << std::endl;
-    std::cout << "(1) Log in as Admin" << std::endl;
-    std::cout << "(2) Log in as User." << std::endl;
-    std::cout << "(3) Exit from bank." << std::endl;
-    std::cout << "Enter your choice : ";
+void Bank::displayMainMenu() {
+    std::cout << "----------Welcome to Apna Bank----------\n";
+    std::cout << "(1) Log in as Admin\n";
+    std::cout << "(2) Log in as User\n";
+    std::cout << "(3) Exit from bank\n";
+    std::cout << "Enter your choice: ";
 }
+
 bool Bank::adminLogin() {
     int id;
     std::string pass;
-    std::cout << "Enter ID : ";
+    std::cout << "Enter ID: ";
     std::cin >> id;
-    std::cout << "Enter Password : ";
+    std::cout << "Enter Password: ";
     std::cin >> pass;
 
     for (int i = 0; i < totalAdmins; i++) {
-        if (id == adHave[i].id) {
-            if (pass == adHave[i].password) {
-                std::cout << "\nLogin Successful." << std::endl << std::endl;
-                return true;
-            }
+        if (id == adHave[i].id && pass == adHave[i].password) {
+            std::cout << "\nLogin Successful.\n\n";
+            return true;
         }
     }
-    std::cout << "Admin not found" << std::endl;
+    std::cout << "Admin not found\n";
     return false;
 }
 
 void Bank::displayAdminMenu() {
-        std::cout << "--------Good Morning Admin--------" << std::endl << std::endl;
-        std::cout << "(1) Add Customer." << std::endl;
-        std::cout << "(2) Display All Customers." << std::endl;
-        std::cout << "(3) Search a Customer." << std::endl;
-        std::cout << "(4) Deposit Money." << std::endl;
-        std::cout << "(5) Log Out." << std::endl;
-        std::cout << "(6) Exit From Bank." << std::endl;
-        std::cout << "Enter Your Choice : ";
+    std::cout << "--------Good Morning Admin--------\n";
+    std::cout << "(1) Add Customer\n";
+    std::cout << "(2) Display All Customers\n";
+    std::cout << "(3) Search a Customer\n";
+    std::cout << "(4) Deposit Money\n";
+    std::cout << "(5) Log Out\n";
+    std::cout << "(6) Exit From Bank\n";
+    std::cout << "Enter Your Choice: ";
 }
+
+void Bank::saveCustomersToFile() {
+    std::ofstream file("customers.txt");
+    if (!file) {
+        std::cout << "Error opening customers file!\n";
+        return;
+    }
+
+    file << totalCustomers << "\n";
+    for (int i = 0; i < totalCustomers; i++) {
+        file << cusHave[i].accountNumber << " "
+            << cusHave[i].name << " "
+            << cusHave[i].balance << " "
+            << cusHave[i].password << "\n";
+    }
+    file.close();
+}
+
+void Bank::saveAdminsToFile() {
+    std::ofstream file("admins.txt");
+    if (!file) {
+        std::cout << "Error opening admins file!\n";
+        return;
+    }
+
+    file << totalAdmins << "\n";
+    for (int i = 0; i < totalAdmins; i++) {
+        file << adHave[i].id << " "
+            << adHave[i].password << "\n";
+    }
+    file.close();
+}
+
 bool Bank::userLogin() {
     int ac;
     std::string pass;
@@ -84,50 +123,25 @@ void Bank::displayUserMenu() {
     std::cout << "(5) Exit From Bank." << std::endl;
     std::cout << "Enter your choice : ";
 }
-void Bank::addCustomer()
-{
-    int n;
-    std::cout << "How many customers you want to add: ";
-    std::cin >> n;
+void Bank::addCustomer() {
+    std::cout << "Enter new customer details:\n";
 
-    for (int i = totalCustomers; i < n + totalCustomers; i++) {
-        std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
-        std::cout << "Enter account number: ";
-        std::cin >> cusHave[totalCustomers].accountNumber;
-        std::cout << "Enter name: ";
-        std::cin >> cusHave[totalCustomers].name;
-        std::cout << "Enter the balance: ";
-        std::cin >> cusHave[totalCustomers].balance;
-        std::cout << "\nCustomer " << cusHave[totalCustomers].name << " added successfully.\n" << std::endl;
-    }
-        totalCustomers += n;
+    Customer newCustomer;
+    std::cout << "Account Number: ";
+    std::cin >> newCustomer.accountNumber;
+    std::cout << "Name: ";
+    std::cin >> newCustomer.name;
+    std::cout << "Initial Balance: ";
+    std::cin >> newCustomer.balance;
+    std::cout << "Password: ";
+    std::cin >> newCustomer.password;
+
+    cusHave[totalCustomers] = newCustomer;
+    totalCustomers++;
+
+    saveCustomersToFile();  // Update file after adding a customer
 }
-/*
-void Bank::addCustomer()
-{
-    int n;
-    std::cout << "How many customers you want to add: ";
-    std::cin >> n;
 
-
-    for (int i = totalCustomers; i < n + totalCustomers; i++) {
-        std::cout << "Enter details of customer " << i + 1 << ":" << std::endl;
-        std::cout << "Enter account number: ";
-        std::cin >> cusHave[totalCustomers].accountNumber;
-        std::cout << "Enter name: ";
-        std::cin >> cusHave[totalCustomers].name;
-        std::cout << "Enter the balance: ";
-        std::cin >> cusHave[totalCustomers].balance;
-        std::cout << "\nCustomer " << cusHave[totalCustomers].name << " added successfully.\n" << std::endl;
-    }
-    totalCustomers += n;
-
-    // opeing file using constructor and writing it
-    std::ofstream cusData("customer.txt", std::ios::app);
-    //cusData.open("customer.txt");
-    cusData << cusHave[totalCustomers].accountNumber;
-    //cusData.close();
-}*/
 
 void Bank::displayCustomers()
 {
@@ -152,6 +166,42 @@ void Bank::displayCustomers()
 
     outFile.close();
 }
+
+void Bank::loadCustomersFromFile() {
+    std::ifstream file("customers.txt");  // Open file in read mode
+    if (!file) {
+        std::cout << "No customer data found. Using predefined customers." << std::endl;
+        return;  // If file does not exist, use hardcoded values
+    }
+
+    file >> totalCustomers;
+
+    for (int i = 0; i < totalCustomers; i++) {
+        file >> cusHave[i].accountNumber
+            >> cusHave[i].name
+            >> cusHave[i].balance
+            >> cusHave[i].password;
+    }
+
+    file.close();
+}
+
+void Bank::loadAdminsFromFile() {
+    std::ifstream file("admins.txt");
+    if (!file) {
+        std::cout << "No admin data found. Using predefined admins." << std::endl;
+        return;
+    }
+
+    file >> totalAdmins;
+
+    for (int i = 0; i < totalAdmins; i++) {
+        file >> adHave[i].id >> adHave[i].password;
+    }
+
+    file.close();
+}
+
 
 void Bank::searchCustomer() {
     int ac;
@@ -221,40 +271,57 @@ void Bank::withdrawMoney() {
 
 void Bank::transferMoney() {
     int s_ac = loggedInUser, r_ac;
-    double amt, bal;
-    std::cout << "Enter the reciever's Account No : ";
+    double amt, senderBalance = -1;
+
+    std::cout << "Enter the receiver's Account No: ";
     std::cin >> r_ac;
-    std::cout << "Enter the amount you want to transfer : ";
+    std::cout << "Enter the amount you want to transfer: ";
     std::cin >> amt;
 
-    bool reciever_found = false;
+    bool receiverFound = false;
 
     for (int i = 0; i < totalCustomers; i++) {
         if (cusHave[i].accountNumber == loggedInUser) {
-            bal = cusHave[i].balance;
+            senderBalance = cusHave[i].balance;
         }
         if (cusHave[i].accountNumber == r_ac) {
-            reciever_found = true;
+            receiverFound = true;
         }
     }
 
-    if (reciever_found == true && bal >= amt) {
-        for (int i = 0; i < totalCustomers; i++) {
-            if (s_ac == cusHave[i].accountNumber) {
-                cusHave[i].balance -= amt;
-                std::cout << "\nMoney Debited form " << cusHave[i].name << " Account " << std::endl;
-            }
-            if (r_ac == cusHave[i].accountNumber) {
-                cusHave[i].balance += amt;
-                std::cout << "\nMoney Credited to " << cusHave[i].name << " Account " << std::endl;
-            }
+    if (!receiverFound) {
+        std::cout << "Receiver account does not exist!" << std::endl;
+        return;
+    }
+
+    if (senderBalance < amt) {
+        std::cout << "Insufficient balance! Transaction failed." << std::endl;
+        return;
+    }
+
+    for (int i = 0; i < totalCustomers; i++) {
+        if (cusHave[i].accountNumber == s_ac) {
+            cusHave[i].balance -= amt;
         }
-        std::cout << "\nTransaction Successful" << std::endl << std::endl;
+        if (cusHave[i].accountNumber == r_ac) {
+            cusHave[i].balance += amt;
+        }
     }
-    if (!reciever_found) {
-        std::cout << "Reciever Account doesnot found" << std::endl;
+
+    std::cout << "Transaction Successful!" << std::endl;
+
+    // ✅ Save updated balances
+    std::ofstream outFile("customer.txt");
+
+    for (int i = 0; i < totalCustomers; i++) {
+        outFile << cusHave[i].accountNumber << " "
+            << cusHave[i].name << " "
+            << cusHave[i].balance << std::endl;
     }
+
+    outFile.close();
 }
+
 
 void Bank::checkBalance() {
     if (loggedInUser == -1) {  // Check if no user is logged in

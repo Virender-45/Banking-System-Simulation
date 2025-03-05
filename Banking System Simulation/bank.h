@@ -1,6 +1,8 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+#include <fstream>
 
 class Bank {
 private:
@@ -18,9 +20,9 @@ public:
     };
 
     Customer cusHave[100];
-    int totalCustomers;
+    int totalCustomers = 0;
     Admin adHave[10];
-    int totalAdmins;
+    int totalAdmins = 0;
 
     Bank();
     void displayMainMenu();
@@ -35,4 +37,8 @@ public:
     void withdrawMoney();
     void transferMoney();
     void checkBalance();
+    void loadCustomersFromFile();
+    void loadAdminsFromFile();
+    void saveCustomersToFile();
+    void saveAdminsToFile();
 };
