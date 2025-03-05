@@ -8,7 +8,7 @@ Bank::Bank()
     cusHave[1] = { 10002, "Sahil", 1000, "Dhiman13" };
     cusHave[2] = { 10003, "Atul", 10000, "Rana14" };
     cusHave[3] = { 10004, "Nikhil", 100000, "Rana15" };
-    cusHave[4] = { 10005, "Abhay", 99872, "Chandel16" };
+    cusHave[4] = { 10005, "Abhay", 20000, "Chandel16" };
     totalCustomers = 5;
 
     adHave[0] = { 100, "Virender123" };
@@ -67,7 +67,7 @@ bool Bank::userLogin() {
     for (int i = 0; i < totalCustomers; i++) {
         if (ac == cusHave[i].accountNumber && pass == cusHave[i].password) {
             loggedInUser = ac;
-            std::cout << "Login successful!" << std::endl;
+            std::cout << "\nLogin successful!" << std::endl << std::endl;
             return true;
         }
     }
@@ -131,12 +131,26 @@ void Bank::addCustomer()
 
 void Bank::displayCustomers()
 {
+    std::ofstream outFile("custoemr.txt"); // open file for writing
+
+    if (!outFile) {
+        std::cout << "Error opening customer.txt file!" << std::endl;
+        return;
+    }
+
     for (int i = 0; i < totalCustomers; i++) {
         std::cout << "Customer " << i + 1 << " :" << std::endl;
         std::cout << "Account No.: " << cusHave[i].accountNumber << std::endl;
         std::cout << "Name: " << cusHave[i].name << std::endl;
         std::cout << "Balance: " << cusHave[i].balance << std::endl;
+        std::cout << "--------------------" << std::endl;
+
+        outFile << cusHave[i].accountNumber << " "
+            << cusHave[i].name << " "
+            << cusHave[i].balance;
     }
+
+    outFile.close();
 }
 
 void Bank::searchCustomer() {
@@ -206,51 +220,39 @@ void Bank::withdrawMoney() {
 }
 
 void Bank::transferMoney() {
-    int s_ac, r_ac;
+    int s_ac = loggedInUser, r_ac;
     double amt, bal;
-    std::cout << "Enter the sender Account No. : ";
-    std::cin >> s_ac;
     std::cout << "Enter the reciever's Account No : ";
     std::cin >> r_ac;
     std::cout << "Enter the amount you want to transfer : ";
     std::cin >> amt;
 
-    bool sender_found = false;
     bool reciever_found = false;
 
     for (int i = 0; i < totalCustomers; i++) {
-        if (s_ac == cusHave[i].accountNumber) {
-            sender_found = true;
+        if (cusHave[i].accountNumber == loggedInUser) {
             bal = cusHave[i].balance;
-            if (bal < amt) {
-                std::cout << "Insufficient Balance in Sender Account" << std::endl;
-            }
         }
-        else if (r_ac == cusHave[i].accountNumber) {
+        if (cusHave[i].accountNumber == r_ac) {
             reciever_found = true;
         }
     }
-    if (sender_found == true && reciever_found == true && bal >= amt) {
+
+    if (reciever_found == true && bal >= amt) {
         for (int i = 0; i < totalCustomers; i++) {
             if (s_ac == cusHave[i].accountNumber) {
                 cusHave[i].balance -= amt;
-                std::cout << "Money Debited form " << cusHave[i].name << " Account " << std::endl;
+                std::cout << "\nMoney Debited form " << cusHave[i].name << " Account " << std::endl;
             }
             if (r_ac == cusHave[i].accountNumber) {
                 cusHave[i].balance += amt;
-                std::cout << "Money Credited to " << cusHave[i].name << " Account " << std::endl;
+                std::cout << "\nMoney Credited to " << cusHave[i].name << " Account " << std::endl;
             }
         }
-        std::cout << "Transaction Successful" << std::endl;
-    }
-    if (!sender_found) {
-        std::cout << "Sender Account doesnot found" << std::endl;
+        std::cout << "\nTransaction Successful" << std::endl << std::endl;
     }
     if (!reciever_found) {
         std::cout << "Reciever Account doesnot found" << std::endl;
-    }
-    if (!sender_found || !reciever_found) {
-        std::cout << "Transaction failed!!!" << std::endl;
     }
 }
 
