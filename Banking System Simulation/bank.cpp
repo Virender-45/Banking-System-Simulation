@@ -80,20 +80,6 @@ void Bank::saveCustomersToFile() {
     file.close();
 }
 
-void Bank::saveAdminsToFile() {
-    std::ofstream file("admins.txt");
-    if (!file) {
-        std::cout << "Error opening admins file!\n";
-        return;
-    }
-
-    file << totalAdmins << "\n";
-    for (int i = 0; i < totalAdmins; i++) {
-        file << adHave[i].id << " "
-            << adHave[i].password << "\n";
-    }
-    file.close();
-}
 
 bool Bank::userLogin() {
     int ac;
@@ -139,9 +125,24 @@ void Bank::addCustomer() {
     cusHave[totalCustomers] = newCustomer;
     totalCustomers++;
 
+    std::cout << "\nCustomer Added Sucessfully" << std::endl;
+
     saveCustomersToFile();  // Update file after adding a customer
 }
+void Bank::saveAdminsToFile() {
+    std::ofstream file("admins.txt");
+    if (!file) {
+        std::cout << "Error opening admins file!\n";
+        return;
+    }
 
+    file << totalAdmins << "\n";
+    for (int i = 0; i < totalAdmins; i++) {
+        file << adHave[i].id << " "
+            << adHave[i].password << "\n";
+    }
+    file.close();
+}
 
 void Bank::displayCustomers()
 {
