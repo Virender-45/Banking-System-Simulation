@@ -22,8 +22,8 @@ public:
         std::string password;
     };
 
-    std::vector<Customer> customers;
-    std::vector<Admin> admins;
+    std::vector<Customer> customers;    //In place of cusHave[100]
+    std::vector<Admin> admins;      //In place of adHave[10]
 
     Bank();
     void displayMainMenu();

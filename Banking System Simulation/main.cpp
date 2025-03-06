@@ -41,13 +41,13 @@ int main()
                         bank.transferMoney();
                         break;
                     case 7:
-                        std::cout << "Logging Out...\n";
+                        std::cout << "Logging Out..." << std::endl;
                         break;
                     case 8:
-                        std::cout << "Exiting System...\n";
+                        std::cout << "Exiting System..." << std::endl;
                         return 0;
                     default:
-                        std::cout << "Invalid Choice! Try again.\n";
+                        std::cout << "Invalid Choice! Try again." << std::endl;
                     }
                 } while (adminChoice != 7);
             }
@@ -76,24 +76,24 @@ int main()
                         bank.checkBalance();
                         break;
                     case 5:
-                        std::cout << "Logging Out...\n";
+                        std::cout << "Logging Out..." << std::endl;
                         break;
                     case 6:
-                        std::cout << "Exiting System...\n";
+                        std::cout << "Exiting System..." << std::endl;
                         return 0;
                     default:
-                        std::cout << "Invalid Choice! Try again.\n";
+                        std::cout << "Invalid Choice! Try again." << std::endl;
                     }
                 } while (userChoice != 5);
             }
             break;
 
         case 3:
-            std::cout << "Thank you for using Apna Bank! Exiting...\n";
+            std::cout << "Thank you for using Apna Bank! Exiting..." << std::endl;
             return 0;
 
         default:
-            std::cout << "Invalid Choice! Please try again.\n";
+            std::cout << "Invalid Choice! Please try again." << std::endl;
         }
     }
 }

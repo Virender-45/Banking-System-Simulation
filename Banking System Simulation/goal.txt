@@ -7,3 +7,4 @@ Features to Implement:
 ✅ Admin Panel: View all accounts, total deposits, and logs of transactions.
 
 create function to prevent duplicate account number
+simplify transferMonmey()

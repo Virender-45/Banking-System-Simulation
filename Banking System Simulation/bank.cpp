@@ -26,7 +26,7 @@ Bank::Bank() {
 void Bank::saveCustomersToFile() {
     std::ofstream file("customers.txt");
     if (!file) {
-        std::cout << "Error saving customer data!\n";
+        std::cout << "Error saving customer data!" << std::endl;
         return;
     }
 
@@ -34,7 +34,7 @@ void Bank::saveCustomersToFile() {
         file << customer.accountNumber << " "
             << customer.name << " "
             << customer.balance << " "
-            << customer.password << "\n";
+            << customer.password << std::endl;
     }
     file.close();
 }
@@ -43,13 +43,13 @@ void Bank::saveCustomersToFile() {
 void Bank::saveAdminsToFile() {
     std::ofstream file("admins.txt"); // Overwrites the file to prevent duplicates
     if (!file) {
-        std::cout << "Error saving admin data!\n";
+        std::cout << "Error saving admin data!" << std::endl;
         return;
     }
 
     for (const auto& admin : admins) {
         file << admin.id << " "
-            << admin.password << "\n";
+            << admin.password << std::endl;
     }
     file.close();
 }
@@ -57,10 +57,10 @@ void Bank::saveAdminsToFile() {
 
 // Display the main menu
 void Bank::displayMainMenu() {
-    std::cout << "----------Welcome to Apna Bank----------\n";
-    std::cout << "(1) Log in as Admin\n";
-    std::cout << "(2) Log in as User\n";
-    std::cout << "(3) Exit\n";
+    std::cout << "----------Welcome to Apna Bank----------" << std::endl;
+    std::cout << "(1) Log in as Admin" << std::endl;
+    std::cout << "(2) Log in as User" << std::endl;
+    std::cout << "(3) Exit" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
@@ -75,25 +75,25 @@ bool Bank::adminLogin() {
 
     for (const auto& admin : admins) {
         if (admin.id == id && admin.password == pass) {
-            std::cout << "\nLogin Successful.\n\n";
+            std::cout << "\nLogin Successful." << std::endl << std::endl;
             return true;
         }
     }
-    std::cout << "Admin not found\n";
+    std::cout << "Admin not found" << std::endl;
     return false;
 }
 
 // Display admin menu
 void Bank::displayAdminMenu() {
-    std::cout << "--------Admin Panel--------\n";
-    std::cout << "(1) Add Customer\n";
-    std::cout << "(2) Display All Customers\n";
-    std::cout << "(3) Search a Customer\n";
-    std::cout << "(4) Deposit Money\n";
-    std::cout << "(5) Withdraw Money\n";
-    std::cout << "(6) Transfer Money\n";
-    std::cout << "(7) Log Out\n";
-    std::cout << "(8) Exit\n";
+    std::cout << "--------Admin Panel--------" << std::endl;
+    std::cout << "(1) Add Customer" << std::endl;
+    std::cout << "(2) Display All Customers" << std::endl;
+    std::cout << "(3) Search a Customer" << std::endl;
+    std::cout << "(4) Deposit Money" << std::endl;
+    std::cout << "(5) Withdraw Money" << std::endl;
+    std::cout << "(6) Transfer Money" << std::endl;
+    std::cout << "(7) Log Out" << std::endl;
+    std::cout << "(8) Exit" << std::endl;
     std::cout << "Enter Your Choice: ";
 }
 
@@ -109,23 +109,23 @@ bool Bank::userLogin() {
     for (const auto& customer : customers) {
         if (customer.accountNumber == ac && customer.password == pass) {
             loggedInUser = ac;
-            std::cout << "\nLogin successful!\n\n";
+            std::cout << "\nLogin successful!" << std::endl << std::endl;
             return true;
         }
     }
-    std::cout << "User not found\n";
+    std::cout << "User not found" << std::endl;
     return false;
 }
 
 // Display user menu
 void Bank::displayUserMenu() {
-    std::cout << "--------User Panel--------\n";
-    std::cout << "(1) Deposit Money\n";
-    std::cout << "(2) Withdraw Money\n";
-    std::cout << "(3) Transfer Money\n";
-    std::cout << "(4) Check Balance\n";
-    std::cout << "(5) Log Out\n";
-    std::cout << "(6) Exit\n";
+    std::cout << "--------User Panel--------" << std::endl;
+    std::cout << "(1) Deposit Money" << std::endl;
+    std::cout << "(2) Withdraw Money" << std::endl;
+    std::cout << "(3) Transfer Money" << std::endl;
+    std::cout << "(4) Check Balance" << std::endl;
+    std::cout << "(5) Log Out" << std::endl;
+    std::cout << "(6) Exit" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
@@ -142,17 +142,17 @@ void Bank::addCustomer() {
     std::cin >> newCustomer.password;
 
     customers.push_back(newCustomer);
-    std::cout << "Customer Added Successfully\n";
+    std::cout << "Customer Added Successfully" << std::endl;
     saveCustomersToFile();
 }
 
 // Display all customers
 void Bank::displayCustomers() {
     for (const auto& customer : customers) {
-        std::cout << "Account No.: " << customer.accountNumber << "\n";
-        std::cout << "Name: " << customer.name << "\n";
-        std::cout << "Balance: " << customer.balance << "\n";
-        std::cout << "--------------------\n";
+        std::cout << "Account No.: " << customer.accountNumber << std::endl;
+        std::cout << "Name: " << customer.name << std::endl;
+        std::cout << "Balance: " << customer.balance << std::endl;
+        std::cout << "--------------------" << std::endl;
     }
 }
 
@@ -164,13 +164,13 @@ void Bank::searchCustomer() {
 
     for (const auto& customer : customers) {
         if (customer.accountNumber == ac) {
-            std::cout << "Account No.: " << customer.accountNumber << "\n";
-            std::cout << "Name: " << customer.name << "\n";
-            std::cout << "Balance: " << customer.balance << "\n";
+            std::cout << "Account No.: " << customer.accountNumber << std::endl;
+            std::cout << "Name: " << customer.name << std::endl;
+            std::cout << "Balance: " << customer.balance << std::endl;
             return;
         }
     }
-    std::cout << "Customer not found.\n";
+    std::cout << "Customer not found." << std::endl;
 }
 
 // Deposit money
@@ -185,12 +185,12 @@ void Bank::depositMoney() {
     for (auto& customer : customers) {
         if (customer.accountNumber == ac) {
             customer.balance += amount;
-            std::cout << "Deposit Successful. New Balance: " << customer.balance << "\n";
+            std::cout << "Deposit Successful. New Balance: " << customer.balance << std::endl;
             saveCustomersToFile();
             return;
         }
     }
-    std::cout << "Account not found.\n";
+    std::cout << "Account not found." << std::endl;
 }
 
 // Withdraw money
@@ -206,16 +206,16 @@ void Bank::withdrawMoney() {
         if (customer.accountNumber == ac) {
             if (customer.balance >= amount) {
                 customer.balance -= amount;
-                std::cout << "Withdrawal Successful. Remaining Balance: " << customer.balance << "\n";
+                std::cout << "Withdrawal Successful. Remaining Balance: " << customer.balance << std::endl;
                 saveCustomersToFile();
                 return;
             } else {
-                std::cout << "Insufficient Balance.\n";
+                std::cout << "Insufficient Balance." << std::endl;
                 return;
             }
         }
     }
-    std::cout << "Account not found.\n";
+    std::cout << "Account not found." << std::endl;
 }
 
 // Transfer money
@@ -238,10 +238,10 @@ void Bank::transferMoney() {
     if (senderIt != customers.end() && receiverIt != customers.end() && senderIt->balance >= amount) {
         senderIt->balance -= amount;
         receiverIt->balance += amount;
-        std::cout << "Transaction Successful!\n";
+        std::cout << "Transaction Successful!" << std::endl;
         saveCustomersToFile();
     } else {
-        std::cout << "Transaction Failed.\n";
+        std::cout << "Transaction Failed." << std::endl;
     }
 }
 
@@ -249,9 +249,9 @@ void Bank::transferMoney() {
 void Bank::checkBalance() {
     for (const auto& customer : customers) {
         if (customer.accountNumber == loggedInUser) {
-            std::cout << "Your Balance: " << customer.balance << "\n";
+            std::cout << "Your Balance: " << customer.balance << std::endl;
             return;
         }
     }
-    std::cout << "Account not found.\n";
+    std::cout << "Account not found." << std::endl;
 }
