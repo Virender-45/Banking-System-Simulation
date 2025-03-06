@@ -5,3 +5,5 @@ Features to Implement:
 ✅ Transactions: Deposit, withdraw, transfer money, and check balance.
 ✅ File Handling: Store account details in a file for data persistence.
 ✅ Admin Panel: View all accounts, total deposits, and logs of transactions.
+
+create function to prevent duplicate account number

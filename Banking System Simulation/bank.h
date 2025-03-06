@@ -1,28 +1,29 @@
 #pragma once
 
-#include <string>
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <fstream>
 
 class Bank {
 private:
     int loggedInUser = -1;
+
 public:
     struct Admin {
         int id;
         std::string password;
     };
+
     struct Customer {
-        int accountNumber = 0;
+        int accountNumber;
         std::string name;
-        double balance = 0;
+        double balance;
         std::string password;
     };
 
-    Customer cusHave[100];
-    int totalCustomers = 0;
-    Admin adHave[10];
-    int totalAdmins = 0;
+    std::vector<Customer> customers;
+    std::vector<Admin> admins;
 
     Bank();
     void displayMainMenu();
@@ -37,8 +38,6 @@ public:
     void withdrawMoney();
     void transferMoney();
     void checkBalance();
-    void loadCustomersFromFile();
-    void loadAdminsFromFile();
     void saveCustomersToFile();
     void saveAdminsToFile();
 };
