@@ -90,9 +90,8 @@ void Bank::displayAdminMenu() {
     std::cout << "(2) Display All Customers" << std::endl;
     std::cout << "(3) Search a Customer" << std::endl;
     std::cout << "(4) Deposit Money" << std::endl;
-    std::cout << "(5) Transfer Money" << std::endl;
-    std::cout << "(6) Log Out" << std::endl;
-    std::cout << "(7) Exit" << std::endl;
+    std::cout << "(5) Log Out" << std::endl;
+    std::cout << "(6) Exit" << std::endl;
     std::cout << "Enter Your Choice: ";
 }
 
@@ -158,6 +157,7 @@ void Bank::addCustomer() {
 // Display all customers
 void Bank::displayCustomers() {
     for (const auto& customer : customers) {
+        std::cout << "--------------------" << std::endl;
         std::cout << "Account No.: " << customer.accountNumber << std::endl;
         std::cout << "Name: " << customer.name << std::endl;
         std::cout << "Balance: " << customer.balance << std::endl;
@@ -194,7 +194,7 @@ void Bank::depositMoney() {
     for (auto& customer : customers) {
         if (customer.accountNumber == ac) {
             customer.balance += amount;
-            std::cout << "Deposit Successful. New Balance: " << customer.balance << std::endl;
+            std::cout << "Deposit Successful.\n New Balance: " << customer.balance << std::endl;
             saveCustomersToFile();
             return;
         }
@@ -233,22 +233,34 @@ void Bank::transferMoney() {
     std::cin >> receiver;
     std::cout << "Enter Transfer Amount: ";
     std::cin >> amount;
+    bool rFound = false;
 
-    auto senderIt = std::find_if(customers.begin(), customers.end(), [&](const Customer& c) {
-        return c.accountNumber == sender;
-    });
+    for (const auto& var : customers) {
+        if (receiver == var.accountNumber) {
+            rFound = true;
+        }
+        if (sender == var.accountNumber) {
+            if (var.balance < amount) {
+                std::cout << "\nInsufficient Balance.\nTransaction Failed\n" << std::endl;
+                return;
+            }
+        }
+    }
+    if (!rFound) {
+        std::cout << "Receiver account Not Found" << std::endl;
+        return;
+    }
 
-    auto receiverIt = std::find_if(customers.begin(), customers.end(), [&](const Customer& c) {
-        return c.accountNumber == receiver;
-    });
-
-    if (senderIt != customers.end() && receiverIt != customers.end() && senderIt->balance >= amount) {
-        senderIt->balance -= amount;
-        receiverIt->balance += amount;
-        std::cout << "Transaction Successful!" << std::endl;
-        saveCustomersToFile();
-    } else {
-        std::cout << "Transaction Failed." << std::endl;
+    for (auto& var : customers) {
+        if (sender == var.accountNumber) {
+            var.balance -= amount;
+            saveCustomersToFile();
+        }
+        if (receiver == var.accountNumber) {
+            var.balance += amount;
+            std::cout << "\nTransaction Successful!" << std::endl;
+            saveCustomersToFile();
+        }
     }
 }
 
@@ -260,5 +272,4 @@ void Bank::checkBalance() {
             return;
         }
     }
-    std::cout << "Account not found." << std::endl;
 }
