@@ -90,10 +90,9 @@ void Bank::displayAdminMenu() {
     std::cout << "(2) Display All Customers" << std::endl;
     std::cout << "(3) Search a Customer" << std::endl;
     std::cout << "(4) Deposit Money" << std::endl;
-    std::cout << "(5) Withdraw Money" << std::endl;
-    std::cout << "(6) Transfer Money" << std::endl;
-    std::cout << "(7) Log Out" << std::endl;
-    std::cout << "(8) Exit" << std::endl;
+    std::cout << "(5) Transfer Money" << std::endl;
+    std::cout << "(6) Log Out" << std::endl;
+    std::cout << "(7) Exit" << std::endl;
     std::cout << "Enter Your Choice: ";
 }
 
@@ -132,18 +131,28 @@ void Bank::displayUserMenu() {
 // Add a new customer
 void Bank::addCustomer() {
     Customer newCustomer;
+    bool duplicate = false;
     std::cout << "Enter Account Number: ";
     std::cin >> newCustomer.accountNumber;
-    std::cout << "Enter Name: ";
-    std::cin >> newCustomer.name;
-    std::cout << "Enter Initial Balance: ";
-    std::cin >> newCustomer.balance;
-    std::cout << "Enter Password: ";
-    std::cin >> newCustomer.password;
 
-    customers.push_back(newCustomer);
-    std::cout << "Customer Added Successfully" << std::endl;
-    saveCustomersToFile();
+    for (const auto& var : customers) {
+        if (newCustomer.accountNumber == var.accountNumber) {
+            std::cout << "\nCustomer with this Account Number already exists" << std::endl;
+            duplicate = true;
+        }
+    }
+    if (!duplicate) {
+        std::cout << "Enter Name: ";
+        std::cin >> newCustomer.name;
+        std::cout << "Enter Initial Balance: ";
+        std::cin >> newCustomer.balance;
+        std::cout << "Enter Password: ";
+        std::cin >> newCustomer.password;
+
+        customers.push_back(newCustomer);
+        std::cout << "Customer Added Successfully" << std::endl;
+        saveCustomersToFile();
+    }
 }
 
 // Display all customers
@@ -195,10 +204,8 @@ void Bank::depositMoney() {
 
 // Withdraw money
 void Bank::withdrawMoney() {
-    int ac;
+    int ac = loggedInUser;
     double amount;
-    std::cout << "Enter Account No.: ";
-    std::cin >> ac;
     std::cout << "Enter Withdraw Amount: ";
     std::cin >> amount;
 
