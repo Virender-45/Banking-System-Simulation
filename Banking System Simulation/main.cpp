@@ -35,18 +35,15 @@ int main()
                         bank.depositMoney();
                         break;
                     case 5:
-                        bank.transferMoney();
-                        break;
-                    case 6:
                         std::cout << "Logging Out..." << std::endl;
                         break;
-                    case 7:
+                    case 6:
                         std::cout << "Exiting System..." << std::endl;
                         return 0;
                     default:
                         std::cout << "Invalid Choice! Try again." << std::endl;
                     }
-                } while (adminChoice != 6);
+                } while (adminChoice != 5);
             }
             break;
 
